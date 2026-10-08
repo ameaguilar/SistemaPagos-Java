@@ -5,18 +5,18 @@ import com.payments.excepciones.InvalidPaymentException;
 
 public abstract class Payment {
     private String id;
-    private double monto;
-    private EstadoPago estado; // enum
+    private double amount;
+    private PaymentStatus status; // enum
 
-    public Payment(String id, double monto){
-        if (monto <=0){
+    public Payment(String id, double amount){
+        if (amount <=0){
             // throw -> detiene la creación de un objeto inválido
             throw new IllegalArgumentException("El monto debe ser mayor a cero");
         }//if
 
         this.id = id;
-        this.monto = monto;
-        this.estado = EstadoPago.PENDING; // el pago siempre inicia en pending
+        this.amount = amount;
+        this.status = PaymentStatus.PENDING; // el pago siempre inicia en pending
     } // constructor
 
     // métod de pagos que lanza las excepciones personalizadas
@@ -27,20 +27,20 @@ public abstract class Payment {
         return id;
     } //getid
 
-    public double getMonto() {
-        return monto;
+    public double getAmount() {
+        return amount;
     } //getmonto
 
-    public EstadoPago getEstado() {
-        return estado;
+    public PaymentStatus getStatus() {
+        return status;
     } //getestado
 
-    public void setEstado(EstadoPago estado) {
-        this.estado = estado;
+    public void setStatus(PaymentStatus status) {
+        this.status = status;
     }// setestado -> actualiza el estado cuando se procesa o reembolsa
 
     @Override
     public String toString(){
-        return "ID: " + id +  "\nMonto: " + monto + "\nEstado: " + estado;
+        return "ID: " + id +  "\nMonto: " + amount + "\nEstado: " + status;
     }// override
 } // class Payment

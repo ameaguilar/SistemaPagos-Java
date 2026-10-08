@@ -1,6 +1,6 @@
 package com.payments.entidades;
 
-public enum EstadoPago {
+public enum PaymentStatus {
     PENDING,
     APPROVED,
     REJECTED,
