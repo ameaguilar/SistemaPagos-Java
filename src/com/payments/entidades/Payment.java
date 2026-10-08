@@ -16,7 +16,7 @@ public abstract class Payment {
         this.id = id;
         this.amount = amount;
         this.status = PaymentStatus.PENDING; // el pago siempre inicia en pending
-    } // constructor
+    } // constructor Payment
 
     // métod de pagos que lanza las excepciones personalizadas
     public abstract boolean processPayment() throws InsufficientFundsException, InvalidPaymentException;
@@ -24,19 +24,19 @@ public abstract class Payment {
 
     public String getId() {
         return id;
-    } //getid
+    } //getId
 
     public double getAmount() {
         return amount;
-    } //getmonto
+    } //getAmount
 
     public PaymentStatus getStatus() {
         return status;
-    } //getestado
+    } //getStatus
 
     public void setStatus(PaymentStatus status) {
         this.status = status;
-    }// setestado -> actualiza el estado cuando se procesa o reembolsa
+    }// setStatus -> actualiza el estado cuando se procesa o reembolsa
 
     @Override
     public String toString(){
