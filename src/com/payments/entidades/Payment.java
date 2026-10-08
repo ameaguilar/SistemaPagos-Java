@@ -1,5 +1,4 @@
 package com.payments.entidades;
-
 import com.payments.excepciones.InsufficientFundsException;
 import com.payments.excepciones.InvalidPaymentException;
 
@@ -11,7 +10,7 @@ public abstract class Payment {
     public Payment(String id, double amount){
         if (amount <=0){
             // throw -> detiene la creación de un objeto inválido
-            throw new IllegalArgumentException("El monto debe ser mayor a cero");
+            throw new InvalidPaymentException("El monto debe ser mayor a cero");
         }//if
 
         this.id = id;
