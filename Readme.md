@@ -15,7 +15,7 @@ Un sistema dinámico y extensible desarrollado en Java que simula la gestión de
 
 ## Tecnologías Utilizadas
 
-- **Lenguaje:** Java (JDK 17+)
+- **Lenguaje:** Java (JDK 21)
 - **IDE:** IntelliJ IDEA
 - **Control de Versiones:** Git & GitHub
 - **Estructuras de Datos:** Java Collections Framework (`ArrayList`)
