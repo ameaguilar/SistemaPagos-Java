@@ -40,6 +40,8 @@ public abstract class Payment {
 
     @Override
     public String toString(){
-        return "ID: " + id +  "\nMonto: " + amount + "\nEstado: " + status;
+        return "ID: " + id +
+                "\nMonto: " + amount +
+                "\nEstado: " + status;
     }// override
 } // class Payment
