@@ -55,18 +55,30 @@ src/
 
 ---
 
-## Decisiones de Diseño Destacadas
-
-- **Control de Estado mediante `Enum`:** Se empleó `PaymentStatus` (`PENDING`, `APPROVED`, `REJECTED`, `REFUNDED`) para evitar errores por cadenas de texto sueltas y garantizar la consistencia en el ciclo de vida del pago.
-- **Criterio de Reembolsos:** `Refundable` se aplicó únicamente a tarjetas de crédito y PayPal. Se excluyó `BankTransferPayment` debido a que las transferencias bancarias directas requieren procesos de compensación manuales o reglas de negocio distintas.
-- **Seguridad en Visualización (`toString`):** En `CreditCardPayment`, se implementó el enmascaramiento automático de los dígitos del plástico, mostrando únicamente los últimos 4 por razones de privacidad.
+### *Clases Base y Entidades (`com.payments.entidades`)
+* **`Payment` (Clase Abstracta):** Define la estructura común de un pago (`id`, `amount`, `status`) y declara el método abstracto `processPayment()`.
+* **`CreditCardPayment` (Clase Concreta):** Representa pagos con tarjeta de crédito. Valida la longitud del plástico, verifica el límite disponible y enmascara los datos sensibles en su método `toString()`. Implementa `Refundable`.
+* **`PayPalPayment` (Clase Concreta):** Modela pagos digitales mediante correo electrónico. Utiliza expresiones regulares (`Regex`) para validar el formato del correo y verifica el saldo de la cuenta. Implementa `Refundable`.
+* **`BankTransferPayment` (Clase Concreta):** Modela transferencias bancarias. Valida la cuenta origen, el nombre de la institución financiera y el saldo en cuenta. No implementa `Refundable`.
+* **`PaymentManager` (Clase Gestora):** Administra el registro, búsqueda y procesamiento de transacciones utilizando una colección `ArrayList<Payment>`. Aprovecha el polimorfismo para procesar cobros y calcular totales.**
 
 ---
 
-## Flujo de Trabajo en GitHub
+### *Interfaces (`com.payments.interfaces`)
+* **`Refundable` (Interfaz):** Define el contrato `refund()` para los métodos de pago que permiten devolver el dinero y restaurar el límite o saldo del usuario.
 
-Ramas
+---
 
-1. **`main`**: Rama con código estable, probado y listo para entrega.
-2. **`develop`**: Rama base para la integración continua del equipo.
-3. **`Ramas individuales por integrante`**: Cada colaborador trabajó en una rama personal nombrada con su propio nombre para desarrollar, probar y subir sus módulos asignados antes de crear sus Pull Requests hacia `develop`
+### *Enums (`com.payments.entidades`)
+* **`PaymentStatus` (Enum):** Controla el ciclo de vida de la transacción mediante estados finitos: `PENDING`, `APPROVED`, `REJECTED` y `REFUNDED`.
+
+---
+
+### *Excepciones Personalizadas (`com.payments.excepciones`)
+* **`InsufficientFundsException:`** Se dispara cuando el saldo o límite de crédito es menor al monto solicitado.
+* **`InvalidPaymentException`:** Se dispara cuando los datos de entrada son inválidos (número de tarjeta corto, correo mal formado, campos vacíos o intentos de procesar transacciones ya finalizadas).
+
+---
+
+### *Clase Principal (`com.payments`)
+* **`PaymentsApp`:** Contiene el método `main` y ejecuta los casos de prueba de integración (procesamiento exitoso, captura de excepciones, búsquedas por ID y ejecuciones de reembolso).
