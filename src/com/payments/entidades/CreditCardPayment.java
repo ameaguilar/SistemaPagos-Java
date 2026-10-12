@@ -20,7 +20,7 @@ public class CreditCardPayment extends Payment implements Refundable{
     @Override
     public boolean processPayment() throws InsufficientFundsException, InvalidPaymentException {
         //1. Validar número de tarjeta
-        if (cardNumber == null ||cardNumber.isBlank() || cardNumber.length()<16){
+        if (cardNumber == null ||cardNumber.isBlank() || !cardNumber.matches("\\d{16,}")){
             setStatus(PaymentStatus.REJECTED);
             throw new InvalidPaymentException("Número de tarjeta inválido. Debe contener al menos 16 dígitos");
         } //primer if

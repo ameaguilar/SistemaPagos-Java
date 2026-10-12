@@ -20,7 +20,7 @@ public class PayPalPayment extends Payment implements Refundable {
         this.email = email;
 
         if(balance < 0){
-            throw new InsufficientFundsException("El saldo en la cuenta debe ser mayor a 0");
+            throw new InvalidPaymentException("El saldo inicial no puede ser negativo");
         }
         this.balance = balance;
     }// constructor PayPalPayment
@@ -86,7 +86,7 @@ public class PayPalPayment extends Payment implements Refundable {
 
     public void setBalance(double balance) {
         if(balance < 0){
-            throw new InsufficientFundsException("El saldo en la cuenta debe ser mayor a 0");
+            throw new InvalidPaymentException("El saldo en la cuenta debe ser mayor a 0");
         }
         this.balance = balance;
     }// setBalance
