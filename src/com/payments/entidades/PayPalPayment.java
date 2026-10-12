@@ -1,10 +1,12 @@
 package com.payments.entidades;
 import com.payments.excepciones.InsufficientFundsException;
 import com.payments.excepciones.InvalidPaymentException;
+import com.payments.interfaces.Refundable;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PayPalPayment extends Payment{
+public class PayPalPayment extends Payment implements Refundable {
 
     private String email;
     private double balance;
@@ -35,7 +37,7 @@ public class PayPalPayment extends Payment{
 
         if(getStatus() == PaymentStatus.PENDING){
             if(getAmount() <= balance){
-                setBalance(balance-getAmount());
+                setBalance(balance - getAmount());
                 setStatus(PaymentStatus.APPROVED);
                 return true;
             } else {
@@ -49,6 +51,20 @@ public class PayPalPayment extends Payment{
         } else if (getStatus() == PaymentStatus.REFUNDED) {
             throw new InvalidPaymentException("La transacción fue reembolsada");
         }
+        return false;
+
+    }
+
+    @Override
+    public boolean refund(){
+
+        if(getStatus() == PaymentStatus.APPROVED){
+            setBalance(balance + getAmount());
+            setStatus(PaymentStatus.REFUNDED);
+            return true;
+        }
+
+        System.out.println("No se puede realizar un reembolso de transacciones pendientes, rechazadas o ya reembolsadas.");
         return false;
 
     }
