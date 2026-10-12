@@ -10,8 +10,15 @@ public class BankTransferPayment extends Payment implements Refundable {
     private String bank;
     private double balance;
 
-    public BankTransferPayment(String id, double amount, int accountNumber, String bank, double balance) {
+    public BankTransferPayment(
+            String id,
+            double amount,
+            int accountNumber,
+            String bank,
+            double balance
+    ) {
         super(id, amount);
+        
 
         if(accountNumber <= 0){
             throw new InvalidPaymentException("El formato de el número de cuenta es invalido");
