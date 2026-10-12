@@ -53,7 +53,7 @@ public class PayPalPayment extends Payment implements Refundable {
         }
         return false;
 
-    }
+    }// constructor processPayment
 
     @Override
     public boolean refund(){
@@ -67,7 +67,7 @@ public class PayPalPayment extends Payment implements Refundable {
         System.out.println("No se puede realizar un reembolso de transacciones pendientes, rechazadas o ya reembolsadas.");
         return false;
 
-    }
+    }// refund
 
     public String getEmail() {
         return email;
@@ -97,14 +97,16 @@ public class PayPalPayment extends Payment implements Refundable {
                 "email='" + email + '\'' +
                 ", balance=" + balance +
                 "} " + super.toString();
-    }
+    }// toString
 
     public void mostrarInfo(){
-        System.out.println(getId());
-        System.out.println(getAmount());
-        System.out.println(getStatus());
-        System.out.println(getEmail());
-        System.out.println(getBalance());
-    }
+        System.out.println("=============== Información de transacción ===============");
+        System.out.println("ID: " + getId());
+        System.out.println("Monto: $" + getAmount());
+        System.out.println("Estatus: " + getStatus());
+        System.out.println("Correo electrónico: " + getEmail());
+        System.out.println("Saldo: $" + getBalance());
+        System.out.println("==========================================================");
+    }// mostrarInfo
 
 }
