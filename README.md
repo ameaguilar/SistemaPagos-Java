@@ -178,11 +178,11 @@ Resultado: rechazado
 
 ### PayPal
 
-El pago solamente podrá aprobarse si existe suficiente saldo.
+El pago solamente podrá aprobarse si existe suficiente balance.
 
 ### Transferencia bancaria
 
-Deberá validar que exista saldo suficiente y que los datos necesarios de la cuenta sean válidos.
+Deberá validar que exista balance suficiente y que los datos necesarios de la cuenta sean válidos.
 
 > Las reglas anteriores son ejemplos. El equipo puede establecer reglas adicionales siempre que estén claramente documentadas.
 

@@ -1,6 +1,54 @@
 package com.payments.entidades;
+import com.payments.excepciones.InsufficientFundsException;
+import com.payments.excepciones.InvalidPaymentException;
 
+<<<<<<< HEAD
+public abstract class Payment {
+    private String id;
+    private double amount;
+    private PaymentStatus status; // enum
+
+    public Payment(String id, double amount){
+        if (amount <=0){
+            // throw -> detiene la creación de un objeto inválido
+            throw new InvalidPaymentException("El monto debe ser mayor a cero");
+        }//if
+
+        this.id = id;
+        this.amount = amount;
+        this.status = PaymentStatus.PENDING; // el pago siempre inicia en pending
+    } // constructor Payment
+
+    // métod de pagos que lanza las excepciones personalizadas
+    public abstract boolean processPayment() throws InsufficientFundsException, InvalidPaymentException;
+
+
+    public String getId() {
+        return id;
+    } //getId
+
+    public double getAmount() {
+        return amount;
+    } //getAmount
+
+    public PaymentStatus getStatus() {
+        return status;
+    } //getStatus
+
+    public void setStatus(PaymentStatus status) {
+        this.status = status;
+    }// setStatus -> actualiza el estado cuando se procesa o reembolsa
+
+    @Override
+    public String toString(){
+        return "ID: " + id +
+                "\nMonto: " + amount +
+                "\nEstado: " + status;
+    }// override
+} // class Payment
+=======
 public class Payment {
     public String getId() {
     }
 }
+>>>>>>> origin/main
