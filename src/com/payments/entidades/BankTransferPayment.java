@@ -6,12 +6,19 @@ import com.payments.interfaces.Refundable;
 
 public class BankTransferPayment extends Payment implements Refundable {
 
-    private int accountNumber;
+    private long accountNumber;
     private String bank;
     private double balance;
 
-    public BankTransferPayment(String id, double amount, int accountNumber, String bank, double balance) {
+    public BankTransferPayment(
+            String id,
+            double amount,
+            long accountNumber,
+            String bank,
+            double balance
+    ) {
         super(id, amount);
+
 
         if(accountNumber <= 0){
             throw new InvalidPaymentException("El formato de el número de cuenta es invalido");
@@ -51,7 +58,7 @@ public class BankTransferPayment extends Payment implements Refundable {
 
     }// processPayment
 
-    public int getAccountNumber() {
+    public long getAccountNumber() {
         return accountNumber;
     }// processPayment
 
@@ -62,7 +69,7 @@ public class BankTransferPayment extends Payment implements Refundable {
 
     }
 
-    public void setAccountNumber(int accountNumber) {
+    public void setAccountNumber(long accountNumber) {
         if(accountNumber <= 0){
             throw new InvalidPaymentException("El formato de el número de cuenta es invalido");
         }
