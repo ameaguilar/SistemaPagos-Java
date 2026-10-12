@@ -14,14 +14,14 @@ public class BankTransferPayment extends Payment implements Refundable {
         super(id, amount);
 
         if(accountNumber <= 0){
-            throw new IllegalArgumentException("El formato de el número de cuenta es invalido");
+            throw new InvalidPaymentException("El formato de el número de cuenta es invalido");
         }
 
         this.accountNumber = accountNumber;
         this.bank = bank;
 
         if(balance < 0){
-            throw new IllegalArgumentException("El saldo en la cuenta debe ser mayor a 0");
+            throw new InvalidPaymentException("El saldo en la cuenta debe ser mayor a 0");
         }
         this.balance = balance;
 
@@ -57,20 +57,14 @@ public class BankTransferPayment extends Payment implements Refundable {
 
     public boolean refund(){
 
-        if(getStatus() == PaymentStatus.APPROVED){
-            setBalance(balance + getAmount());
-            setStatus(PaymentStatus.REFUNDED);
-            return true;
-        }
-
-        System.out.println("No se puede realizar un reembolso de transacciones pendientes, rechazadas o ya reembolsadas.");
+        System.out.println("Este método de pago no permite reembolsos");
         return false;
 
     }
 
     public void setAccountNumber(int accountNumber) {
         if(accountNumber <= 0){
-            throw new IllegalArgumentException("El formato de el número de cuenta es invalido");
+            throw new InvalidPaymentException("El formato de el número de cuenta es invalido");
         }
         this.accountNumber = accountNumber;
     }// setAccountNumber
@@ -89,7 +83,7 @@ public class BankTransferPayment extends Payment implements Refundable {
 
     public void setBalance(double balance) {
         if(balance < 0){
-            throw new IllegalArgumentException("El saldo en la cuenta debe ser mayor a 0");
+            throw new InvalidPaymentException("El saldo en la cuenta debe ser mayor a 0");
         }
         this.balance = balance;
     }// setBalance
