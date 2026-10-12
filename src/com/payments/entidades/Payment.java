@@ -2,6 +2,7 @@ package com.payments.entidades;
 import com.payments.excepciones.InsufficientFundsException;
 import com.payments.excepciones.InvalidPaymentException;
 
+<<<<<<< HEAD
 public abstract class Payment {
     private String id;
     private double amount;
@@ -45,3 +46,9 @@ public abstract class Payment {
                 "\nEstado: " + status;
     }// override
 } // class Payment
+=======
+public class Payment {
+    public String getId() {
+    }
+}
+>>>>>>> origin/main
