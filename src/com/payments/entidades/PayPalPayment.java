@@ -61,6 +61,7 @@ public class PayPalPayment extends Payment implements Refundable {
         if(getStatus() == PaymentStatus.APPROVED){
             setBalance(balance + getAmount());
             setStatus(PaymentStatus.REFUNDED);
+            System.out.println("Reembolso procesado: +$" + getAmount());
             return true;
         }
 
