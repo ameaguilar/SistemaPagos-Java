@@ -14,7 +14,7 @@ public class PaymentManager {
 
 
     public void registerPayment(Payment payment) {
-        if (payment.processPayment()) {
+        if (payment.getStatus() == PaymentStatus.APPROVED && findPaymentById(payment.getId()) == null) {
             payments.add(payment);
             System.out.println("Pago registrado exitosamente. ID: " + payment.getId());
         }
