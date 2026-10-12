@@ -15,12 +15,12 @@ public class PayPalPayment extends Payment implements Refundable {
         super(id, amount);
 
         if(!validateEmail(email)){
-            throw new IllegalArgumentException("El formato del correo electrónico es incorrecto");
+            throw new InvalidPaymentException("El formato del correo electrónico es incorrecto");
         }
         this.email = email;
 
         if(balance < 0){
-            throw new IllegalArgumentException("El saldo en la cuenta debe ser mayor a 0");
+            throw new InsufficientFundsException("El saldo en la cuenta debe ser mayor a 0");
         }
         this.balance = balance;
     }// constructor PayPalPayment
@@ -75,7 +75,7 @@ public class PayPalPayment extends Payment implements Refundable {
 
     public void setEmail(String email){
         if(!validateEmail(email)){
-            throw new IllegalArgumentException("El formato del correo electrónico es incorrecto");
+            throw new InvalidPaymentException("El formato del correo electrónico es incorrecto");
         }
         this.email = email;
     }// setEmail
@@ -86,7 +86,7 @@ public class PayPalPayment extends Payment implements Refundable {
 
     public void setBalance(double balance) {
         if(balance < 0){
-            throw new IllegalArgumentException("El saldo en la cuenta debe ser mayor a 0");
+            throw new InsufficientFundsException("El saldo en la cuenta debe ser mayor a 0");
         }
         this.balance = balance;
     }// setBalance
