@@ -63,9 +63,9 @@ src/
 
 ---
 
-## Flujo de Trabajo en Git y GitHub
+## Flujo de Trabajo en GitHub
 
-El equipo adoptó un modelo basado en **Git Flow Simplificado**:
+Ramas
 
 1. **`main`**: Rama con código estable, probado y listo para entrega.
 2. **`develop`**: Rama base para la integración continua del equipo.
